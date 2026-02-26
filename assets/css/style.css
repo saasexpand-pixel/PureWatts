@@ -215,15 +215,18 @@ textarea {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 1rem 0;
-    transition: all 0.4s var(--ease);
+    padding: 1.1rem 0;
+    transition: all 0.5s var(--ease);
+    background: linear-gradient(180deg, rgba(14, 11, 48, 0.6) 0%, transparent 100%);
 }
 
 .navbar.scrolled {
-    background: rgba(14, 11, 48, 0.95);
-    backdrop-filter: blur(20px);
-    padding: 0.6rem 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(14, 11, 48, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 0.65rem 0;
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .nav-inner {
@@ -233,30 +236,43 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 44px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .nav-logo img {
-    height: 36px;
+    height: 38px;
     width: auto;
     max-width: 160px;
     object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover img {
+    opacity: 0.85;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.2rem;
 }
 
 .nav-links a {
     font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.75);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: color 0.25s ease;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
     position: relative;
+    padding: 0.3rem 0;
 }
 
 .nav-links a:hover {
@@ -266,23 +282,30 @@ textarea {
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
     height: 2px;
     background: var(--orange);
-    transition: width 0.3s var(--ease);
+    border-radius: 1px;
+    transition: transform 0.35s var(--ease);
+    transform-origin: center;
 }
 
 .nav-links a:hover::after {
-    width: 100%;
+    transform: translateX(-50%) scaleX(1);
 }
 
 .nav-cta {
     background: var(--orange) !important;
     color: var(--white) !important;
-    padding: 0.6rem 1.4rem !important;
-    border-radius: 4px;
+    padding: 0.6rem 1.6rem !important;
+    border-radius: 6px;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.08em !important;
+    transition: all 0.3s var(--ease) !important;
+    box-shadow: 0 2px 12px rgba(251, 84, 31, 0.2);
 }
 
 .nav-cta::after {
@@ -291,15 +314,18 @@ textarea {
 
 .nav-cta:hover {
     background: var(--orange-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(251, 84, 31, 0.35) !important;
 }
 
 .nav-burger {
     display: none;
-    width: 30px;
-    height: 24px;
+    width: 28px;
+    height: 20px;
     position: relative;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .nav-burger span {
@@ -307,20 +333,22 @@ textarea {
     width: 100%;
     height: 2px;
     background: var(--white);
-    transition: all 0.3s ease;
+    border-radius: 1px;
+    transition: all 0.35s var(--ease);
     transform-origin: center;
 }
 
 .nav-burger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
 .nav-burger.active span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .nav-burger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .mobile-menu {
@@ -329,13 +357,13 @@ textarea {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--navy-deep);
+    background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
     z-index: 999;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.8rem;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s var(--ease);
@@ -348,11 +376,16 @@ textarea {
 
 .mobile-menu a {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--white);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
+    transition: color 0.25s ease;
+}
+
+.mobile-menu a:hover {
+    color: var(--orange);
 }
 
 @media (max-width: 768px) {
@@ -365,11 +398,22 @@ textarea {
     }
 
     .nav-logo img {
-        height: 30px;
+        height: 32px;
         max-width: 130px;
     }
-}
 
+    .nav-inner {
+        height: 38px;
+    }
+
+    .navbar {
+        padding: 0.8rem 0;
+    }
+
+    .navbar.scrolled {
+        padding: 0.5rem 0;
+    }
+}
 /* ========== HERO ========== */
 .hero {
     position: relative;
