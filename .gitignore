@@ -1,0 +1,17 @@
+# Original unoptimized images
+*.jpg
+*.MP.jpg
+*.jpeg
+*.JPEG
+
+# Node
+node_modules/
+package.json
+package-lock.json
+
+# Misc
+Copie de LOGO_purewatts_3.svg
+
+# OS
+.DS_Store
+Thumbs.db
