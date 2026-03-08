@@ -4,7 +4,10 @@
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    gsap.registerPlugin(ScrollTrigger);
+    const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+    if (hasGsap) {
+        gsap.registerPlugin(ScrollTrigger);
+    }
 
     // ========== NAVBAR ==========
     const navbar = document.getElementById('navbar');
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========== HERO ANIMATIONS ==========
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && hasGsap) {
         // Hero entrance
         const heroTl = gsap.timeline({ delay: 0.3 });
         heroTl
@@ -173,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     } else {
-        // Reduced motion: just show everything
+        // Reduced motion or missing GSAP: just show everything
         document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('revealed'));
     }
 

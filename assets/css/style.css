@@ -1466,6 +1466,12 @@ textarea {
     transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
 }
 
+/* Keep hero text visible even if animation scripts fail to load. */
+.hero .reveal-up {
+    opacity: 1;
+    transform: none;
+}
+
 .reveal-up.revealed {
     opacity: 1;
     transform: translateY(0);
